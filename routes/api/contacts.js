@@ -15,4 +15,4 @@ router.put("/:id", validateBody(schema.addJoiSchema), ctrl.updateContacts);
 
 router.delete("/:id", ctrl.deleteContacts);
 
-module.exports = router;
+module.exports = { router };
