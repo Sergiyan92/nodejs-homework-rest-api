@@ -18,10 +18,6 @@ const userSchema = new Schema({
     enum: ["starter", "pro", "business"],
     default: "starter",
   },
-  owner: {
-    type: Schema.Types.ObjectId,
-    ref: "user",
-  },
   token: String,
 });
 userSchema.post("save", handleMongooseError);
