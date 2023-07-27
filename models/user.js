@@ -31,7 +31,6 @@ const loginSchema = Joi.object({
   password: Joi.string().min(6).required(),
   email: Joi.string().required(),
 });
-
 const schemas = {
   registerSchema,
   loginSchema,
