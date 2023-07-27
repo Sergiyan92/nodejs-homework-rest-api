@@ -11,7 +11,6 @@ const getAll = async (req, res) => {
   }).populate("owner", "email subscription");
   res.status(200).json(result);
 };
-
 const getById = async (req, res) => {
   const { id } = req.params;
   const result = await Contact.findById(id);
@@ -20,13 +19,11 @@ const getById = async (req, res) => {
   }
   res.status(200).json(result);
 };
-
 const addContacts = async (req, res) => {
   const { _id: owner } = req.user;
   const result = await Contact.create({ ...req.body, owner });
   res.status(201).json(result);
 };
-
 const updateContacts = async (req, res) => {
   const { id } = req.params;
   const result = await Contact.findByIdAndUpdate(id, req.body, { new: true });
@@ -35,7 +32,6 @@ const updateContacts = async (req, res) => {
   }
   res.status(200).json(result);
 };
-
 const updateStatusContact = async (req, res) => {
   const { id } = req.params;
   const result = await Contact.findByIdAndUpdate(id, req.body, { new: true });

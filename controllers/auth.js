@@ -21,7 +21,6 @@ const register = async (req, res) => {
     },
   });
 };
-
 const login = async (req, res) => {
   const { email, password } = req.body;
   const user = await User.findOne({ email });
@@ -45,7 +44,6 @@ const login = async (req, res) => {
     },
   });
 };
-
 const getCurrent = async (req, res) => {
   const { email, subscription } = req.user;
 
@@ -54,12 +52,21 @@ const getCurrent = async (req, res) => {
     subscription,
   });
 };
-
 const logout = async (req, res) => {
   const { _id } = req.user;
   await User.findByIdAndUpdate(_id, { token: "" });
 
   res.status(204).json();
+};
+const updateUserSubscribtion = async (req, res) => {
+  const { _id } = req.user;
+  const user = await User.findByIdAndUpdate(_id, req.body, {
+    new: ("pro", "business"),
+  });
+  if (!user) {
+    throw HttpError(400, "missing field subscription");
+  }
+  res.status(200).json(user);
 };
 
 module.exports = {
@@ -67,4 +74,5 @@ module.exports = {
   login: ctrlWrapper(login),
   getCurrent: ctrlWrapper(getCurrent),
   logout: ctrlWrapper(logout),
+  updateUserSubscribtion: ctrlWrapper(updateUserSubscribtion),
 };
